@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_ENHO" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <TOOL>HOOK_IMPL</TOOL>
+   <SHORTTEXT>ZSCP_WF_TRIGGER</SHORTTEXT>
+   <ORIGINAL_OBJECT>
+    <PGMID>R3TR</PGMID>
+    <ORG_OBJ_TYPE>PROG</ORG_OBJ_TYPE>
+    <ORG_OBJ_NAME>SAPMV45A</ORG_OBJ_NAME>
+    <ORG_MAIN_TYPE>PROG</ORG_MAIN_TYPE>
+    <ORG_MAIN_NAME>SAPMV45A</ORG_MAIN_NAME>
+    <PROGRAMNAME>SAPMV45A</PROGRAMNAME>
+   </ORIGINAL_OBJECT>
+   <ENHANCEMENTS>
+    <ENH_HOOK_IMPL>
+     <PROGRAMNAME>SAPMV45A</PROGRAMNAME>
+     <ENHMODE>D</ENHMODE>
+     <FULL_NAME>\PR:SAPMV45A\FO:USEREXIT_SAVE_DOCUMENT\SE:BEGIN\EI</FULL_NAME>
+     <SOURCE>
+      <item/>
+      <item>************************************************************************</item>
+      <item/>
+      <item>* Developer: Neeta Thankachan (Syniti)</item>
+      <item/>
+      <item>* Date: 24.07.2019</item>
+      <item/>
+      <item>* Ref: 800/DCS</item>
+      <item/>
+      <item>* Desc: Sales Order enhancement on save</item>
+      <item/>
+      <item>************************************************************************ * MODIFICATION HISTORY</item>
+      <item/>
+      <item>************************************************************************</item>
+      <item/>
+      <item>* Developer:</item>
+      <item/>
+      <item>* Date:</item>
+      <item/>
+      <item>* Ref:</item>
+      <item/>
+      <item>* Desc:</item>
+      <item/>
+      <item>* Search on: *******************************************************************</item>
+      <item/>
+      <item>BREAK nthankachan.</item>
+      <item>data lv_deldt type d.</item>
+      <item>lv_deldt = sy-datum + 2.</item>
+      <item>data lv_d type p.</item>
+      <item>data lv_t type p.</item>
+      <item/>
+      <item>data ls_xvbep like LINE OF xvbep.</item>
+      <item>data : lr_ref type ref to ZCL_SCP_WORKFLOW_TRIGGER.</item>
+      <item>LOOP AT xvbep into ls_xvbep..</item>
+      <item>CALL FUNCTION &apos;SD_DATETIME_DIFFERENCE&apos;</item>
+      <item>EXPORTING</item>
+      <item>date1                  = sy-datum</item>
+      <item>time1                  = sy-uzeit</item>
+      <item>date2                  = ls_xvbep-edatu</item>
+      <item>time2                  = sy-uzeit</item>
+      <item>IMPORTING</item>
+      <item>DATEDIFF               = lv_d</item>
+      <item>TIMEDIFF               = lv_t</item>
+      <item>*   EARLIEST               =</item>
+      <item>* EXCEPTIONS</item>
+      <item>*   INVALID_DATETIME       = 1</item>
+      <item>*   OTHERS                 = 2</item>
+      <item>.</item>
+      <item>if lv_d &lt;= 2.</item>
+      <item>*  data lv_message type string.</item>
+      <item>*  CONCATENATE ls_xvbep-posnr ls_xvbep-edatu into lv_message.</item>
+      <item>*  message lv_message type &apos;I&apos;.</item>
+      <item/>
+      <item/>
+      <item/>
+      <item>create object lr_ref.</item>
+      <item>CALL METHOD lr_ref-&gt;trigger_oauth_wf</item>
+      <item>EXPORTING</item>
+      <item>i_vbeln = xvbep-vbeln</item>
+      <item>i_posnr = xvbep-posnr</item>
+      <item>i_bmeng = xvbep-bmeng</item>
+      <item>i_edatu = xvbep-edatu</item>
+      <item>.</item>
+      <item/>
+      <item/>
+      <item>endif.</item>
+      <item/>
+      <item>ENDLOOP.</item>
+      <item/>
+      <item/>
+      <item>IF sy-subrc &lt;&gt; 0.</item>
+      <item>* Implement suitable error handling here</item>
+      <item>ENDIF.</item>
+      <item/>
+      <item/>
+     </SOURCE>
+    </ENH_HOOK_IMPL>
+   </ENHANCEMENTS>
+   <SPACES>
+    <item>
+     <FULL_NAME>\PR:SAPMV45A\FO:USEREXIT_SAVE_DOCUMENT\SE:BEGIN\EI</FULL_NAME>
+     <SPACES>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>2</item>
+      <item>4</item>
+      <item>4</item>
+      <item>4</item>
+      <item>4</item>
+      <item>1</item>
+      <item>3</item>
+      <item>3</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>10</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>2</item>
+      <item>4</item>
+      <item>4</item>
+      <item>4</item>
+      <item>4</item>
+      <item>4</item>
+      <item>0</item>
+      <item>0</item>
+      <item>2</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+     </SPACES>
+    </item>
+   </SPACES>
+  </asx:values>
+ </asx:abap>
+</abapGit>
