@@ -11,9 +11,26 @@ public section.
       !I_VBELN type VBELN_VA
       !I_POSNR type POSNR
       !I_BMENG type BMENG
-      !I_EDATU type EDATU .
+      !I_EDATU type EDATU
+    exporting
+      !E_INSTANCE type CHAR30 .
+  methods SET_WF_INSTANCE_DATA
+    importing
+      !I_VBELN type VBELN_VA
+      !I_POSNR type POSNR_VA
+      !I_WF_INSTANCE type CHAR30 .
+  methods SET_INSTANCE_TABLE .
 protected section.
 private section.
+
+    TYPES : BEGIN OF ty_wf_table,
+              vbeln       TYPE vbeln_va,
+              posnr       TYPE posnr_va,
+              wf_instance TYPE char30,
+            END OF ty_wf_table.
+
+    DATA : wa_wf_tables type  ZDLV_WF.
+    DATA : tt_wf_tables TYPE TABLE OF   ZDLV_WF.
 ENDCLASS.
 
 
@@ -23,6 +40,26 @@ CLASS ZCL_SCP_WORKFLOW_TRIGGER IMPLEMENTATION.
 
   method CONSTRUCTOR.
   endmethod.
+
+
+  method SET_INSTANCE_TABLE.
+
+    insert ZDLV_WF from table  me->TT_WF_TABLES.
+  endmethod.
+
+
+  METHOD SET_WF_INSTANCE_DATA.
+
+
+
+wa_wf_tables-posnr = i_vbeln.
+wa_wf_tables-vbeln = i_posnr.
+wa_wf_tables-wf_instance  = i_wf_instance.
+
+append wa_wf_tables to  me->tt_wf_tables.
+
+
+  ENDMETHOD.
 
 
   METHOD trigger_oauth_wf.
@@ -36,10 +73,20 @@ CLASS ZCL_SCP_WORKFLOW_TRIGGER IMPLEMENTATION.
           lv_code         TYPE i,
           oauth           TYPE string,
           rest            TYPE string,
+          instance        TYPE string,
           subrc           TYPE sy-subrc,
           errortext       TYPE string,
           gv_body         TYPE string,
           i_quantity  type string .
+
+    types : begin of ty_wf_table,
+            VBELN  type VBELN_VL,
+            POSNR  type POSNR_VL,
+             WF_INSTANCE type char30,
+           end of ty_wf_table.
+   data : wa_wf_tables type    ty_wf_table.
+   data : tt_wf_tables type table of   ty_wf_table.
+
 * create oAuth object using destination
     cl_http_client=>create_by_destination( EXPORTING destination = 'SCP_OAUTH_NT'         " SCP OAUTH destination
                                            IMPORTING client      = lo_client_oauth ).
@@ -96,6 +143,12 @@ CLASS ZCL_SCP_WORKFLOW_TRIGGER IMPLEMENTATION.
 
     content = lo_client_wfapi->response->get_cdata( ).
     WRITE:/ content.
+
+    SPLIT content AT '"id":"' INTO rest content.
+    SPLIT content AT '"' INTO instance rest.
+    e_instance = instance.
+
+
     lo_client_wfapi->close( ).
   ENDMETHOD.
 ENDCLASS.

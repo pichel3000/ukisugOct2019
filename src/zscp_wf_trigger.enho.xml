@@ -48,10 +48,11 @@
       <item>lv_deldt = sy-datum + 2.</item>
       <item>data lv_d type p.</item>
       <item>data lv_t type p.</item>
-      <item/>
+      <item>data lv_instance type char30.</item>
       <item>data ls_xvbep like LINE OF xvbep.</item>
       <item>data : lr_ref type ref to ZCL_SCP_WORKFLOW_TRIGGER.</item>
-      <item>LOOP AT xvbep into ls_xvbep..</item>
+      <item>LOOP AT xvbep into ls_xvbep  .</item>
+      <item>if ls_xvbep-bmeng is not initial.</item>
       <item>CALL FUNCTION &apos;SD_DATETIME_DIFFERENCE&apos;</item>
       <item>EXPORTING</item>
       <item>date1                  = sy-datum</item>
@@ -76,16 +77,28 @@
       <item>create object lr_ref.</item>
       <item>CALL METHOD lr_ref-&gt;trigger_oauth_wf</item>
       <item>EXPORTING</item>
-      <item>i_vbeln = xvbep-vbeln</item>
-      <item>i_posnr = xvbep-posnr</item>
-      <item>i_bmeng = xvbep-bmeng</item>
-      <item>i_edatu = xvbep-edatu</item>
+      <item>i_vbeln = ls_xvbep-vbeln</item>
+      <item>i_posnr = ls_xvbep-posnr</item>
+      <item>i_bmeng = ls_xvbep-bmeng</item>
+      <item>i_edatu = ls_xvbep-edatu</item>
+      <item>IMPORTING</item>
+      <item>e_instance = lv_instance.</item>
+      <item>.</item>
+      <item>if lv_instance is not initial.</item>
+      <item/>
+      <item>CALL METHOD lr_ref-&gt;set_wf_instance_data</item>
+      <item>EXPORTING</item>
+      <item>i_vbeln       = ls_xvbep-vbeln</item>
+      <item>i_posnr       = ls_xvbep-posnr</item>
+      <item>i_wf_instance = lv_instance</item>
       <item>.</item>
       <item/>
-      <item/>
       <item>endif.</item>
-      <item/>
+      <item>endif.</item>
+      <item>endif.</item>
       <item>ENDLOOP.</item>
+      <item>CALL METHOD lr_ref-&gt;set_instance_table</item>
+      <item>.</item>
       <item/>
       <item/>
       <item>IF sy-subrc &lt;&gt; 0.</item>
@@ -134,6 +147,7 @@
       <item>0</item>
       <item>0</item>
       <item>0</item>
+      <item>1</item>
       <item>0</item>
       <item>2</item>
       <item>4</item>
@@ -162,12 +176,24 @@
       <item>4</item>
       <item>4</item>
       <item>4</item>
+      <item>2</item>
+      <item>4</item>
       <item>4</item>
       <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>2</item>
+      <item>4</item>
+      <item>4</item>
+      <item>4</item>
+      <item>4</item>
       <item>0</item>
       <item>2</item>
       <item>0</item>
       <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>4</item>
       <item>0</item>
       <item>0</item>
       <item>0</item>
