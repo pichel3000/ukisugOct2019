@@ -449,6 +449,40 @@
       <RPY_DYFATC>
        <CONT_TYPE>TABLE_CTRL</CONT_TYPE>
        <CONT_NAME>TCTRL_ZDLV_WF</CONT_NAME>
+       <TYPE>TEXT</TYPE>
+       <NAME>*ZDLV_WF-USERID</NAME>
+       <TEXT>User_Name_______________________________</TEXT>
+       <LINE>001</LINE>
+       <COLUMN>004</COLUMN>
+       <LENGTH>040</LENGTH>
+       <VISLENGTH>012</VISLENGTH>
+       <HEIGHT>001</HEIGHT>
+       <FORMAT>CHAR</FORMAT>
+       <FROM_DICT>X</FROM_DICT>
+       <MODIFIC>V</MODIFIC>
+       <REQU_ENTRY>N</REQU_ENTRY>
+       <TC_HEADING>X</TC_HEADING>
+      </RPY_DYFATC>
+      <RPY_DYFATC>
+       <CONT_TYPE>TABLE_CTRL</CONT_TYPE>
+       <CONT_NAME>TCTRL_ZDLV_WF</CONT_NAME>
+       <TYPE>TEXT</TYPE>
+       <NAME>*ZDLV_WF-TIMESTAMP</NAME>
+       <TEXT>Time_Stamp______________________________</TEXT>
+       <LINE>001</LINE>
+       <COLUMN>005</COLUMN>
+       <LENGTH>040</LENGTH>
+       <VISLENGTH>019</VISLENGTH>
+       <HEIGHT>001</HEIGHT>
+       <FORMAT>CHAR</FORMAT>
+       <FROM_DICT>X</FROM_DICT>
+       <MODIFIC>V</MODIFIC>
+       <REQU_ENTRY>N</REQU_ENTRY>
+       <TC_HEADING>X</TC_HEADING>
+      </RPY_DYFATC>
+      <RPY_DYFATC>
+       <CONT_TYPE>TABLE_CTRL</CONT_TYPE>
+       <CONT_NAME>TCTRL_ZDLV_WF</CONT_NAME>
        <TYPE>CHECK</TYPE>
        <NAME>VIM_MARKED</NAME>
        <LINE>001</LINE>
@@ -520,6 +554,42 @@
        <OUTPUT_FLD>X</OUTPUT_FLD>
        <REQU_ENTRY>N</REQU_ENTRY>
       </RPY_DYFATC>
+      <RPY_DYFATC>
+       <CONT_TYPE>TABLE_CTRL</CONT_TYPE>
+       <CONT_NAME>TCTRL_ZDLV_WF</CONT_NAME>
+       <TYPE>TEMPLATE</TYPE>
+       <NAME>ZDLV_WF-USERID</NAME>
+       <TEXT>____________</TEXT>
+       <LINE>001</LINE>
+       <COLUMN>004</COLUMN>
+       <LENGTH>012</LENGTH>
+       <VISLENGTH>012</VISLENGTH>
+       <HEIGHT>001</HEIGHT>
+       <FORMAT>CHAR</FORMAT>
+       <FROM_DICT>X</FROM_DICT>
+       <MODIFIC>X</MODIFIC>
+       <FOREIGNKEY>X</FOREIGNKEY>
+       <INPUT_FLD>X</INPUT_FLD>
+       <OUTPUT_FLD>X</OUTPUT_FLD>
+      </RPY_DYFATC>
+      <RPY_DYFATC>
+       <CONT_TYPE>TABLE_CTRL</CONT_TYPE>
+       <CONT_NAME>TCTRL_ZDLV_WF</CONT_NAME>
+       <TYPE>TEMPLATE</TYPE>
+       <NAME>ZDLV_WF-TIMESTAMP</NAME>
+       <TEXT>___________________</TEXT>
+       <LINE>001</LINE>
+       <COLUMN>005</COLUMN>
+       <LENGTH>019</LENGTH>
+       <VISLENGTH>019</VISLENGTH>
+       <HEIGHT>001</HEIGHT>
+       <FORMAT>DEC</FORMAT>
+       <FROM_DICT>X</FROM_DICT>
+       <MODIFIC>X</MODIFIC>
+       <FOREIGNKEY>X</FOREIGNKEY>
+       <INPUT_FLD>X</INPUT_FLD>
+       <OUTPUT_FLD>X</OUTPUT_FLD>
+      </RPY_DYFATC>
      </FIELDS>
      <FLOW_LOGIC>
       <RPY_DYFLOW>
@@ -571,6 +641,12 @@
        <LINE>FIELD ZDLV_WF-WF_INSTANCE .</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
+       <LINE>FIELD ZDLV_WF-USERID .</LINE>
+      </RPY_DYFLOW>
+      <RPY_DYFLOW>
+       <LINE>FIELD ZDLV_WF-TIMESTAMP .</LINE>
+      </RPY_DYFLOW>
+      <RPY_DYFLOW>
        <LINE>MODULE SET_UPDATE_FLAG ON CHAIN-REQUEST.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
@@ -618,6 +694,8 @@
       <item>1</item>
       <item>3</item>
       <item>3</item>
+      <item>4</item>
+      <item>4</item>
       <item>4</item>
       <item>4</item>
       <item>4</item>
